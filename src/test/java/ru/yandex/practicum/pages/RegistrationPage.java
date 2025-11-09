@@ -1,5 +1,6 @@
 package ru.yandex.practicum.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -36,26 +37,32 @@ public class RegistrationPage {
 
     }
 
+    @Step
     public void setName(String name) {
         driver.findElement(nameField).sendKeys(name);
     }
 
+    @Step
     public void setEmail(String email) {
         driver.findElement(emailField).sendKeys(email);
     }
 
+    @Step
     public void setPassword(String password) {
         driver.findElement(passwordField).sendKeys(password);
     }
 
+    @Step
     public void clickRegister() {
         driver.findElement(registerButton).click();
     }
 
+    @Step
     public String getErrorMessage() {
         return driver.findElement(errorMessage).getText();
     }
 
+    @Step
     public void clickLogButton() {
         driver.findElement(loginButton).click();
     }

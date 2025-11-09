@@ -1,5 +1,6 @@
 package ru.yandex.practicum.tests;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,22 +40,10 @@ public class RegistrationTests extends BaseTest {
         loginPage = new LoginPage(driver);
         registrationPage = new RegistrationPage(driver);
 
-        user.setName("Yghdus");
-        user.setEmail("dhdhbdujdb@mail.ru");
-        user.setPassword("1232526");
+        user.setName(RandomStringUtils.randomAlphabetic(12));
+        user.setEmail(RandomStringUtils.randomAlphabetic(12) + "@mail.ru");
+        user.setPassword(RandomStringUtils.randomAlphabetic(12));
 
-        accessToken =
-                userSteps.createUser(user)
-                        .statusCode(200)
-                        .body("success", is(true))
-                        .extract()
-                        .path("accessToken");
-
-        if (accessToken != null) {
-            userSteps.deleteUser(accessToken)
-                    .statusCode(202);
-
-        }
     }
 
 
@@ -91,7 +80,7 @@ public class RegistrationTests extends BaseTest {
     }
 
 
-    @After
+    @After  //удаляем пользователя через апи,тк не предусмотрено удаление черещ ui
     public void tearDown() {
 
         accessToken =

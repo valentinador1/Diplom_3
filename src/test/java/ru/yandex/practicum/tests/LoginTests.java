@@ -1,5 +1,6 @@
 package ru.yandex.practicum.tests;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
@@ -37,9 +38,9 @@ public class LoginTests extends BaseTest {
         registrationPage = new RegistrationPage(driver);
 
         user = new User();
-        user.setName("Yghdus");
-        user.setEmail("dhdhbdujdb@mail.ru");
-        user.setPassword("1232526");
+        user.setName(RandomStringUtils.randomAlphabetic(12));
+        user.setEmail(RandomStringUtils.randomAlphabetic(12) +"@mail.ru");
+        user.setPassword(RandomStringUtils.randomAlphabetic(12));
 
         accessToken =
                 userSteps.createUser(user)

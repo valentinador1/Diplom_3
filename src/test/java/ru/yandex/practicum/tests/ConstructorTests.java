@@ -24,43 +24,40 @@ public class ConstructorTests extends BaseTest {
     public void setUp() {
         driver = driverFactory.getDriver();
         mainPage = new MainPage(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-
     @Test
-    public void navigateConstructorSections1() {
+    public void navigateConstructorSectionsFromBunsToSauces() {
         mainPage.open();
 
         mainPage.goToSauces();
 
-        By saucesTab = By.xpath("(//div[contains(@class,'tab_tab__1SPyG')])[2]");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.attributeContains(saucesTab, "class", "tab_tab_type_current"));
 
-        String bunsClasses = driver.findElement(By.xpath("(//div[contains(@class,'tab_tab__1SPyG')])[1]")).getAttribute("class");
-        String sausesClasses = driver.findElement(By.xpath("(//div[contains(@class,'tab_tab__1SPyG')])[2]")).getAttribute("class");
-        String fillingsClasses = driver.findElement(By.xpath("(//div[contains(@class,'tab_tab__1SPyG')])[3]")).getAttribute("class");
+        wait.until(ExpectedConditions.attributeContains(
+                mainPage.getSaucesTabLocator(), "class", "tab_tab_type_current"));
 
-        Assert.assertTrue(sausesClasses.contains("tab_tab_type_current"));
 
+        boolean expected = true;
+        boolean actual = mainPage.isSaucesTabActive();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void navigateConstructorSections2() {
-
+    public void navigateConstructorSectionsFromSaucesToFillings() {
         mainPage.open();
+
+
         mainPage.goToFillings();
 
-        By fillingsTab = By.xpath("(//div[contains(@class,'tab_tab__1SPyG')])[3]");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        wait.until(ExpectedConditions.attributeContains(fillingsTab, "class", "tab_tab_type_current"));
+        wait.until(ExpectedConditions.attributeContains(
+                mainPage.getFillingsTabLocator(), "class", "tab_tab_type_current"));
 
-        String fillingsClasses = driver.findElement(fillingsTab).getAttribute("class");
 
-        Assert.assertTrue(fillingsClasses.contains("tab_tab_type_current"));
-
+        boolean expected = true;
+        boolean actual = mainPage.isFillingsTabActive();
+        Assert.assertEquals(expected, actual);
     }
 
 }

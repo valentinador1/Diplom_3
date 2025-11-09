@@ -1,5 +1,6 @@
 package ru.yandex.practicum.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,11 +15,9 @@ public class MainPage {
     private By personalAccountButton = By.xpath("//p[text()='Личный Кабинет']/ancestor::a");
 
 
-//    private By buns = By.xpath("//span[text()='Булки']");
-
-    private By buns = By.xpath("//h1[text()='Соберите бургер']/following-sibling::div/div");
-    private By sauces = By.xpath("//span[text()='Соусы']");
-    private By fillings = By.xpath("//span[text()='Начинки']");
+    private By bunsTab = By.xpath("(//div[contains(@class,'tab_tab__1SPyG')])[1]");
+    private By saucesTab = By.xpath("(//div[contains(@class,'tab_tab__1SPyG')])[2]");
+    private By fillingsTab = By.xpath("(//div[contains(@class,'tab_tab__1SPyG')])[3]");
 
     private final String BASE_URL = "https://stellarburgers.education-services.ru/";
 
@@ -26,29 +25,64 @@ public class MainPage {
         this.driver = driver;
     }
 
+    @Step
     public void open() {
         driver.get(BASE_URL);
     }
 
+    @Step
     public void clickLoginButtonMain() {
         driver.findElement(loginButtonMain).click();
     }
 
+    @Step
     public void clickPersonalAccountButton() {
         driver.findElement(personalAccountButton).click();
     }
 
-    // Конструктор
+
+    //    Конструктор
+    @Step
     public void goToBuns() {
-        driver.findElement(buns).click();
+        driver.findElement(bunsTab).click();
     }
 
+    @Step
     public void goToSauces() {
-        driver.findElement(sauces).click();
+        driver.findElement(saucesTab).click();
     }
 
+    @Step
     public void goToFillings() {
-        driver.findElement(fillings).click();
+        driver.findElement(fillingsTab).click();
+    }
+
+
+    @Step
+    public boolean isBunsTabActive() {
+        return driver.findElement(bunsTab).getAttribute("class").contains("tab_tab_type_current");
+    }
+
+    @Step
+    public boolean isSaucesTabActive() {
+        return driver.findElement(saucesTab).getAttribute("class").contains("tab_tab_type_current");
+    }
+
+    @Step
+    public boolean isFillingsTabActive() {
+        return driver.findElement(fillingsTab).getAttribute("class").contains("tab_tab_type_current");
+    }
+
+    public By getBunsTabLocator() {
+        return bunsTab;
+    }
+
+    public By getSaucesTabLocator() {
+        return saucesTab;
+    }
+
+    public By getFillingsTabLocator() {
+        return fillingsTab;
     }
 }
 
