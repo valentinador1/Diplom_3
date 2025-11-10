@@ -59,8 +59,7 @@ public class RegistrationTests extends BaseTest {
         registrationPage.setPassword(user.getPassword());
         registrationPage.clickRegister();
 
-        WebElement loginButton = driver.findElement(By.xpath("//button[text()='Войти']"));
-        assertTrue(loginButton.isDisplayed());
+        assertTrue(registrationPage.logButtonIsDisplayed());
 
     }
 

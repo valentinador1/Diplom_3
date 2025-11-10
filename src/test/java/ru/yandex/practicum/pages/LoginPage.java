@@ -26,38 +26,49 @@ public class LoginPage {
     //кнопка Войти по восстановлению пароля
     private By loginForgotPasswordButton = By.xpath("//a[@class='Auth_link__1fOlj' and normalize-space(text())='Войти']");
 
+    //кнопка Оформить заказ
+    private By orderButton = By.xpath("//button[text()='Оформить заказ']");
+
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
 
-    @Step
+    @Step("Ввести email")
     public void setEmail(String email) {
         driver.findElement(emailField).sendKeys(email);
     }
 
-    @Step
+    @Step("Ввести пароль")
     public void setPassword(String password) {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    @Step
+    @Step("Нажать на кнопку Вход")
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
     }
 
-    @Step
+    @Step("Нажать на кнопку Регистрация")
     public void clickRegisterButton() {
         driver.findElement(registerButton).click();
     }
 
-    @Step
+    @Step("Нажать на ссылку Забыли пароль")
     public void clickForgotPasswordButton() {
         driver.findElement(forgotPasswordButton).click();
     }
 
-    @Step
+    @Step("Нажать на кнопку Войти по восстановлению пароля")
     public void clickLoginForgotPasswordButton() {
         driver.findElement(loginForgotPasswordButton).click();
     }
+
+    @Step("Найти кнопку Оформить заказ")
+
+    public boolean orderButtonIsDisplayed() {
+        return driver.findElement(orderButton).isDisplayed();
+    }
 }
+

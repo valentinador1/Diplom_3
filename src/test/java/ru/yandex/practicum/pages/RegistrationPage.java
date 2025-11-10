@@ -27,6 +27,9 @@ public class RegistrationPage {
 
     private By errorMessage = By.className("input__error");
 
+    //кнопка войти проверка отображения
+    private By logButton = By.xpath("//button[text()='Войти']");
+
 
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
@@ -37,33 +40,38 @@ public class RegistrationPage {
 
     }
 
-    @Step
+    @Step("Ввести Имя")
     public void setName(String name) {
         driver.findElement(nameField).sendKeys(name);
     }
 
-    @Step
+    @Step("Ввести email")
     public void setEmail(String email) {
         driver.findElement(emailField).sendKeys(email);
     }
 
-    @Step
+    @Step("Ввести пароль")
     public void setPassword(String password) {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    @Step
+    @Step("Нажать на кнопку регистрации")
     public void clickRegister() {
         driver.findElement(registerButton).click();
     }
 
-    @Step
+    @Step("Получить текст сообщения об ошибке")
     public String getErrorMessage() {
         return driver.findElement(errorMessage).getText();
     }
 
-    @Step
+    @Step("Нажать на кнопку Войти")
     public void clickLogButton() {
         driver.findElement(loginButton).click();
+    }
+
+    @Step("Найти кнопку Войти")
+    public boolean logButtonIsDisplayed() {
+        return driver.findElement(logButton).isDisplayed();
     }
 }

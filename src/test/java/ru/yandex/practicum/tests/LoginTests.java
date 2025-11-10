@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.yandex.practicum.model.User;
 import ru.yandex.practicum.pages.LoginPage;
 import ru.yandex.practicum.pages.MainPage;
@@ -58,7 +59,8 @@ public class LoginTests extends BaseTest {
         loginPage.setPassword(user.getPassword());
         loginPage.clickLoginButton();
 
-        assertTrue(driver.findElement(By.xpath("//button[text()='Оформить заказ']")).isDisplayed());
+       assertTrue(loginPage.orderButtonIsDisplayed());
+
     }
 
     @Test
@@ -68,7 +70,7 @@ public class LoginTests extends BaseTest {
         loginPage.setEmail(user.getEmail());
         loginPage.setPassword(user.getPassword());
         loginPage.clickLoginButton();
-        assertTrue(driver.findElement(By.xpath("//button[text()='Оформить заказ']")).isDisplayed());
+        assertTrue(loginPage.orderButtonIsDisplayed());
     }
 
 
@@ -81,7 +83,7 @@ public class LoginTests extends BaseTest {
         loginPage.setEmail(user.getEmail());
         loginPage.setPassword(user.getPassword());
         loginPage.clickLoginButton();
-        assertTrue(driver.findElement(By.xpath("//button[text()='Оформить заказ']")).isDisplayed());
+        assertTrue(loginPage.orderButtonIsDisplayed());
     }
 
     @Test
@@ -93,7 +95,7 @@ public class LoginTests extends BaseTest {
         loginPage.setEmail(user.getEmail());
         loginPage.setPassword(user.getPassword());
         loginPage.clickLoginButton();
-        assertTrue(driver.findElement(By.xpath("//button[text()='Оформить заказ']")).isDisplayed());
+        assertTrue(loginPage.orderButtonIsDisplayed());
     }
 
     @After

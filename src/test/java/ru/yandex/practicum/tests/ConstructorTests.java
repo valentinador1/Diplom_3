@@ -18,13 +18,12 @@ public class ConstructorTests extends BaseTest {
     public DriverFactory driverFactory = new DriverFactory();
     private WebDriver driver;
     private MainPage mainPage;
-    private WebDriverWait wait;
+
 
     @Before
     public void setUp() {
         driver = driverFactory.getDriver();
         mainPage = new MainPage(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Test
@@ -32,11 +31,6 @@ public class ConstructorTests extends BaseTest {
         mainPage.open();
 
         mainPage.goToSauces();
-
-
-        wait.until(ExpectedConditions.attributeContains(
-                mainPage.getSaucesTabLocator(), "class", "tab_tab_type_current"));
-
 
         boolean expected = true;
         boolean actual = mainPage.isSaucesTabActive();
@@ -47,16 +41,21 @@ public class ConstructorTests extends BaseTest {
     public void navigateConstructorSectionsFromSaucesToFillings() {
         mainPage.open();
 
-
         mainPage.goToFillings();
-
-
-        wait.until(ExpectedConditions.attributeContains(
-                mainPage.getFillingsTabLocator(), "class", "tab_tab_type_current"));
-
 
         boolean expected = true;
         boolean actual = mainPage.isFillingsTabActive();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void navigateConstructorFromFillingsToBuns() {
+        mainPage.open();
+        mainPage.goToFillings();
+        mainPage.goToBuns();
+
+        boolean expected = true;
+        boolean actual = mainPage.isBunsTabActive();
         Assert.assertEquals(expected, actual);
     }
 
